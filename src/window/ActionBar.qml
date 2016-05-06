@@ -31,11 +31,12 @@ import Material.ListItems 0.1 as ListItem
 Item {
     id: actionBar
 
-    implicitHeight: 1 * Device.gridUnit * Units.dp
+    implicitHeight: parent.height*0.12 //bad
 
     anchors {
         left: parent.left
         right: parent.right
+        top: parent.top
     }
 
     /*!
