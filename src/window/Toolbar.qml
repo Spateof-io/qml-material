@@ -41,7 +41,7 @@ View {
             height = Math.max(height, sidebarHeight)
         }
 
-        return height
+        return page.height/10
     }
     property int targetHeight: actionBarHeight
     property int maxActionCount: Device.type === Device.desktop
@@ -62,7 +62,7 @@ View {
                           : Theme.primaryColor
 
     implicitHeight: 1 * Device.gridUnit * Units.dp
-    height: targetHeight
+    height: actionBarHeight
     elevation: backgroundColor === page.color ? 0 : page.actionBar.elevation
     fullWidth: true
     clipContent: true
@@ -138,6 +138,7 @@ View {
                    ? rightSidebarStack.left
                    : clientSideDecorations ? windowControls.left : parent.right
             rightMargin: 0
+            verticalCenter: parent.verticalCenter
         }
 
         delegate: toolbarDelegate
@@ -227,6 +228,7 @@ View {
             iconName: "navigation/close"
             color: Theme.lightDark(toolbar.backgroundColor, Theme.light.textColor,
                 Theme.dark.textColor)
+            size:actionBarHeight*0.7
             onClicked: Qt.quit()
         }
     }
