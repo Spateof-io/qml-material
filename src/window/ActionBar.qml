@@ -31,7 +31,7 @@ import Material.ListItems 0.1 as ListItem
 Item {
     id: actionBar
 
-    implicitHeight: parent.height*0.12 //bad
+    implicitHeight: app.height*0.12
 
     anchors {
         left: parent.left

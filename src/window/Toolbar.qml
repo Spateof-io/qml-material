@@ -33,15 +33,15 @@ View {
         if (!page || page.actionBar.hidden)
             return 0
 
-        var height = implicitHeight + page.actionBar.extendedHeight
+        var height =  page.actionBar.implicitHeight + page.actionBar.extendedHeight
 
         if (page.rightSidebar && page.rightSidebar.showing) {
-            var sidebarHeight = implicitHeight + page.rightSidebar.actionBar.extendedHeight
+            var sidebarHeight =  page.actionBar.implicitHeight + page.rightSidebar.actionBar.extendedHeight
 
             height = Math.max(height, sidebarHeight)
         }
 
-        return page.height/10
+        return height
     }
     property int targetHeight: actionBarHeight
     property int maxActionCount: Device.type === Device.desktop
