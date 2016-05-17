@@ -101,7 +101,7 @@ Text {
 
     property var fontInfo: fontStyles[style]
 
-    font.pixelSize: (!Device.isMobile && fontInfo.size_desktop
+    font.pointSize: (!Device.isMobile && fontInfo.size_desktop
             ? fontInfo.size_desktop : fontInfo.size) * Units.dp
     font.family: "Roboto"
     font.weight: {
