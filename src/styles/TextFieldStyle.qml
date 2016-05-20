@@ -1,19 +1,31 @@
 /*
  * QML Material - An application framework implementing Material Design.
+ * Copyright (C) 2015 Ricardo Vieira <ricardo.vieira@tecnico.ulisboa.pt>
+ *               2015 Michael Spencer <sonrisesoftware@gmail.com>
  *
- * Copyright (C) 2015-2016 Michael Spencer <sonrisesoftware@gmail.com>
- *               2015 Ricardo Vieira <ricardo.vieira@tecnico.ulisboa.pt>
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 2.1 of the
+ * License, or (at your option) any later version.
  *
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
 import QtQuick 2.4
 import QtQuick.Controls.Styles 1.3
 import QtQuick.Layouts 1.1
-import Material 0.3
+import Material 0.2
+/*!
+   \qmltype TextField
+   \inqmlmodule Material
 
+   \brief A single-line text input control.
+ */
 TextFieldStyle {
     id: style
 
@@ -25,9 +37,8 @@ TextFieldStyle {
     }
 
     font {
-        id:myFont
         family: echoMode == TextInput.Password ? "Default" : "Roboto"
-        pointSize: 16 //* Units.dp
+        pixelSize:16*dp
     }
 
     renderType: Text.QtRendering
@@ -38,30 +49,38 @@ TextFieldStyle {
 
     background : Item {
         id: background
+        Component.onCompleted:{
+            implicitHeight=  height+ (floatingLabel ? fieldPlaceholder.font.pixelSize : 0) + (helperTextLabel.visible ? helpertextRow.height : 0)
+            console.log(".......this is the fieldPlaceholder.font.pixelSize : " + fieldPlaceholder.font.pixelSize)
+            console.log(".......helpertextRow.height : " + helperTextLabel.height)
+            console.log("...........height : " + background.height)
+
+        }
 
         property color color: control.hasOwnProperty("color") ? control.color : Theme.accentColor
         property color errorColor: control.hasOwnProperty("errorColor")
-                ? control.errorColor : Palette.colors["red"]["500"]
+                                   ? control.errorColor : Palette.colors["red"]["500"]
         property string helperText: control.hasOwnProperty("helperText") ? control.helperText : ""
         property bool floatingLabel: control.hasOwnProperty("floatingLabel") ? control.floatingLabel : ""
         property bool hasError: control.hasOwnProperty("hasError")
-                ? control.hasError : characterLimit && control.length > characterLimit
+                                ? control.hasError : characterLimit && control.length > characterLimit
         property int characterLimit: control.hasOwnProperty("characterLimit") ? control.characterLimit : 0
         property bool showBorder: control.hasOwnProperty("showBorder") ? control.showBorder : true
 
         Rectangle {
             id: underline
             color: background.hasError ? background.errorColor
-                                    : control.activeFocus ? background.color
-                                                          : Theme.light.hintColor
+                                       : control.activeFocus ? background.color
+                                                             : Theme.light.hintColor
 
-            height: control.activeFocus ? 2 * Units.dp : 1 * Units.dp
-            visible: background.showBorder
+            height: control.activeFocus ?dp*2 :dp*1
+            visible: true // background.showBorder
 
             anchors {
                 left: parent.left
                 right: parent.right
                 bottom: parent.bottom
+                bottomMargin: floatingLabel ? helperTextLabel.height :0
             }
 
             Behavior on height {
@@ -73,17 +92,16 @@ TextFieldStyle {
             }
         }
 
-
         Label {
             id: fieldPlaceholder
 
             anchors.verticalCenter: parent.verticalCenter
-            text: control.placeholderText
-            font.pointSize: 16
-            anchors.margins: -12 * Units.dp
+            text: "control.placeholderText"
+            font.pixelSize:16*dp
+            anchors.margins: -Units.dp(1)
             color: background.hasError ? background.errorColor
-                                  : control.activeFocus && control.text !== ""
-                                        ? background.color : Theme.light.hintColor
+                                       : control.activeFocus && control.text !== ""
+                                         ? background.color : Theme.light.hintColor
 
             states: [
                 State {
@@ -96,7 +114,7 @@ TextFieldStyle {
                     }
                     PropertyChanges {
                         target: fieldPlaceholder
-                        font.pointSize: 9
+                        font.pixelSize:12*dp
                     }
                 },
                 State {
@@ -118,7 +136,7 @@ TextFieldStyle {
                     }
                     NumberAnimation {
                         duration: 200
-                        property: "font.pointSize"
+                        property: "font.pixelSize"
                     }
                 }
             ]
@@ -127,18 +145,19 @@ TextFieldStyle {
         }
 
         RowLayout {
+            id: helpertextRow
             anchors {
                 left: parent.left
                 right: parent.right
                 top: underline.top
-                topMargin: 4 * Units.dp
+                topMargin:dp*4
             }
 
             Label {
                 id: helperTextLabel
                 visible: background.helperText && background.showBorder
-                text: background.helperText
-                font.pointSize: 8 //12 * Units.dp
+                text: "background.helperText"
+                font.pixelSize:12*dp
                 color: background.hasError ? background.errorColor
                                            : Qt.darker(Theme.light.hintColor)
 
@@ -147,7 +166,7 @@ TextFieldStyle {
                 }
 
                 property string helperText: control.hasOwnProperty("helperText")
-                        ? control.helperText : ""
+                                            ? control.helperText : ""
             }
 
             Label {
@@ -155,7 +174,7 @@ TextFieldStyle {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                 visible: background.characterLimit && background.showBorder
                 text: control.length + " / " + background.characterLimit
-                font.pointSize: 9
+                font.pixelSize:12*dp
                 color: background.hasError ? background.errorColor : Theme.light.hintColor
                 horizontalAlignment: Text.AlignLeft
 
@@ -164,5 +183,6 @@ TextFieldStyle {
                 }
             }
         }
+
     }
 }
