@@ -96,7 +96,7 @@ TextFieldStyle {
             id: fieldPlaceholder
 
             anchors.verticalCenter: parent.verticalCenter
-            text: "control.placeholderText"
+            text: control.placeholderText
             font.pixelSize:16*dp
             anchors.margins: -Units.dp(1)
             color: background.hasError ? background.errorColor
@@ -156,7 +156,7 @@ TextFieldStyle {
             Label {
                 id: helperTextLabel
                 visible: background.helperText && background.showBorder
-                text: "background.helperText"
+                text: background.helperText
                 font.pixelSize:12*dp
                 color: background.hasError ? background.errorColor
                                            : Qt.darker(Theme.light.hintColor)
