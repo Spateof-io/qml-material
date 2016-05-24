@@ -98,7 +98,7 @@ TextFieldStyle {
             anchors.verticalCenter: parent.verticalCenter
             text: control.placeholderText
             font.pixelSize:16*dp
-            anchors.margins: -Units.dp(1)
+            anchors.margins: -dp(1)
             color: background.hasError ? background.errorColor
                                        : control.activeFocus && control.text !== ""
                                          ? background.color : Theme.light.hintColor
