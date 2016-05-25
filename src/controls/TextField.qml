@@ -30,7 +30,7 @@ Controls.TextField {
     property bool hasError: characterLimit && length > characterLimit
     property int characterLimit
     property bool showBorder: true
-    height: if(floatingLabel) font.pixelSize * 4
+    height: if(floatingLabel) font.pixelSize * 2.8
     style: MaterialStyle.TextFieldStyle {}
 
 
