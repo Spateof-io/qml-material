@@ -38,7 +38,7 @@ TextFieldStyle {
 
     font {
         family: echoMode == TextInput.Password ? "Default" : "Roboto"
-        pixelSize:16*dp
+        pixelSize:dp(16)
     }
 
     renderType: Text.QtRendering
@@ -50,11 +50,7 @@ TextFieldStyle {
     background : Item {
         id: background
         Component.onCompleted:{
-            implicitHeight=  height+ (floatingLabel ? fieldPlaceholder.font.pixelSize : 0) + (helperTextLabel.visible ? helpertextRow.height : 0)
-            console.log(".......this is the fieldPlaceholder.font.pixelSize : " + fieldPlaceholder.font.pixelSize)
-            console.log(".......helpertextRow.height : " + helperTextLabel.height)
-            console.log("...........height : " + background.height)
-
+            implicitHeight=  height+ floatingLabel ? fieldPlaceholder.font.pixelSize : 0 + helperTextLabel.visible ? helpertextRow.height : 0
         }
 
         property color color: control.hasOwnProperty("color") ? control.color : Theme.accentColor
@@ -73,8 +69,8 @@ TextFieldStyle {
                                        : control.activeFocus ? background.color
                                                              : Theme.light.hintColor
 
-            height: control.activeFocus ?dp*2 :dp*1
-            visible: true // background.showBorder
+            height: control.activeFocus ?dp(2) :dp(1)
+            visible: background.showBorder
 
             anchors {
                 left: parent.left
@@ -97,7 +93,7 @@ TextFieldStyle {
 
             anchors.verticalCenter: parent.verticalCenter
             text: control.placeholderText
-            font.pixelSize:16*dp
+            font.pixelSize:dp(16)
             anchors.margins: -dp(1)
             color: background.hasError ? background.errorColor
                                        : control.activeFocus && control.text !== ""
@@ -114,7 +110,7 @@ TextFieldStyle {
                     }
                     PropertyChanges {
                         target: fieldPlaceholder
-                        font.pixelSize:12*dp
+                        font.pixelSize:dp(12)
                     }
                 },
                 State {
@@ -150,14 +146,14 @@ TextFieldStyle {
                 left: parent.left
                 right: parent.right
                 top: underline.top
-                topMargin:dp*4
+                topMargin:dp(4)
             }
 
             Label {
                 id: helperTextLabel
                 visible: background.helperText && background.showBorder
                 text: background.helperText
-                font.pixelSize:12*dp
+                font.pixelSize:dp(12)
                 color: background.hasError ? background.errorColor
                                            : Qt.darker(Theme.light.hintColor)
 
@@ -174,7 +170,7 @@ TextFieldStyle {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                 visible: background.characterLimit && background.showBorder
                 text: control.length + " / " + background.characterLimit
-                font.pixelSize:12*dp
+                font.pixelSize:dp(12)
                 color: background.hasError ? background.errorColor : Theme.light.hintColor
                 horizontalAlignment: Text.AlignLeft
 
