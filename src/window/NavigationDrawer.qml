@@ -10,8 +10,8 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Window 2.0
 import Material 0.3
-
 /*!
    \qmltype NavigationDrawer
    \inqmlmodule Material
@@ -24,8 +24,10 @@ PopupBase {
 
     overlayLayer: "dialogOverlayLayer"
     overlayColor: Qt.rgba(0, 0, 0, 0.3)
-
-    width: Math.min(parent.width - 1 * Device.gridUnit * Units.dp, 5 * Device.gridUnit * Units.dp)
+    /*!
+       \this fix a Units.dp issue seen in somes android phones (kitkat 4.4.4 as a case)
+     */
+    width: (Device.isMobile ? (Screen.height - Screen.desktopAvailableHeight)/24 : 1) * Device.gridUnit * Math.min(parent.width/Device.gridUnit - 1,5)
 
     anchors {
         left: mode === "left" ? parent.left : undefined
