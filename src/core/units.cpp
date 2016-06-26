@@ -12,7 +12,6 @@
 
 #include <QGuiApplication>
 #include <QQuickItem>
-//#include <math.h>
 #if defined(Q_OS_ANDROID)
 #include <QtAndroidExtras>
 #endif
@@ -70,7 +69,8 @@ void UnitsAttached::screenChanged(QScreen *screen)
 
 int UnitsAttached::dp() const
 {
-    auto dp = round((dpi() / 160)+0.1);
+
+    auto dp =round(dpi() / 160);
     return dp > 0 ? dp * m_multiplier : m_multiplier;
 }
 
@@ -122,10 +122,8 @@ void UnitsAttached::updateDPI()
         return;
     }
     m_dpi = displayMetrics.getField<int>("densityDpi");
-    //m_multiplier = displayMetrics.getField<float>("density");
 #else
     // standard dpi
     m_dpi = m_screen->logicalDotsPerInch() * m_screen->devicePixelRatio();
 #endif
-    //m_multiplier = round(m_dpi/160);
 }
