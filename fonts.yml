@@ -1,0 +1,21 @@
+out: wiamb-fonts
+fonts:
+  - roboto/Roboto-Black 
+  - roboto/Roboto-BlackItalic 
+  - roboto/Roboto-Bold 
+  - roboto/Roboto-BoldItalic 
+  - roboto/Roboto-Italic 
+  - roboto/Roboto-Light 
+  - roboto/Roboto-LightItalic 
+  - roboto/Roboto-Medium 
+  - roboto/Roboto-MediumItalic 
+  - roboto/Roboto-Regular 
+  - roboto/Roboto-Thin 
+  - roboto/Roboto-ThinItalic 
+  - roboto/RobotoCondensed-Bold 
+  - roboto/RobotoCondensed-BoldItalic 
+  - roboto/RobotoCondensed-Italic 
+  - roboto/RobotoCondensed-Light 
+  - roboto/RobotoCondensed-LightItalic 
+  - roboto/RobotoCondensed-Regular
+  - roboto/RobotoCondensed-Regular

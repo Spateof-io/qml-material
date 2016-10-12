@@ -61,9 +61,9 @@ if __name__ == '__main__':
 
     if out_filename.endswith('.qrc'):
         out_dirname = os.path.dirname(out_filename)
-    else:
-        out_dirname = out_filename
-        out_filename = os.path.join(out_dirname, 'icons.qrc')
+        print("true" + out_dirname)
+    out_dirname = out_filename
+    out_filename = os.path.join(out_dirname, 'icons.qrc')
 
     if not os.path.exists(out_dirname):
         os.makedirs(out_dirname)
