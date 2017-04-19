@@ -10,6 +10,7 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Window 2.1
 import QtQuick.Layouts 1.1
 import Material 0.3
 import Material.ListItems 0.1 as ListItem
@@ -28,10 +29,15 @@ import Material.ListItems 0.1 as ListItem
    use the instance provided by the page. See the example in the \l Page documentation
    for more details.
  */
+
 Item {
     id: actionBar
-
-    implicitHeight: 1 * Device.gridUnit * Units.dp
+    /*
+      this resolves the issue where Units.dp and dp() function had no effect in android phone
+      to solve this issue i've tried to get the actual height of the Status bar which is equal to 24dp
+      and estimate the Density independence of it, after all this is done only in case if we are running within android os
+    */
+    implicitHeight: Device.gridUnit * (Device.isMobile ? (Screen.height - Screen.desktopAvailableHeight)/24 : 1)
 
     anchors {
         left: parent.left
